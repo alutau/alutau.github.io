@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "La asignatura pendiente: Ciberseguridad"
-date:   2020-12-09 16:03:17 +0100
+date:   2020-12-09 
 categories: jekyll update
 ---
 Hoy en día, cualquier empresa, posee información digital y trabaja en mayor o menor medida con equipos informáticos sensibles a cualquier amenaza.
