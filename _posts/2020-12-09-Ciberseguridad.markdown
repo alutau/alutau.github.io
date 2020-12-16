@@ -7,7 +7,7 @@ date:   2020-12-09
 categories: jekyll update
 ---
 
-![](/assets/img/ciberseguridad/ciberseguridad.jpg)
+![](/mis-assets/img/ciberseguridad/ciberseguridad.jpg)
 
 
 Hoy en día, cualquier empresa, posee información digital y trabaja en mayor o menor medida con equipos informáticos sensibles a cualquier amenaza.
