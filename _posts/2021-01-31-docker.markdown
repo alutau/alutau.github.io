@@ -1,0 +1,61 @@
+---
+typora-copy-images-to: ../mis-assets/img/docker/
+typora-root-url: ../
+layout: post
+title:  "Docker"
+date:   2021-01-31
+categories: jekyll update
+---
+
+## Docker
+
+`build.sh` para construir el contenedor.
+
+
+
+![2](/mis-assets/img/docker/2.png)
+
+Podemos comprobar que el contenedor está corriendo ejecutando `docker ps`
+
+![1.1](/mis-assets/img/docker/1.1.png)
+
+
+
+Hemos lanzado `build.sh` y todo fue bien. Ahora usaremos `debug.sh`para lanzar el contenedor en modo `debug/foreground`
+
+Una vez visitemos la página varias veces veremos que el contador de visitas aumenta:
+
+
+
+![4](/mis-assets/img/docker/4.png)
+
+
+
+![3.1](/mis-assets/img/docker/3.1-1612123541013.png)
+
+
+
+Sin embargo, si lo paramos con `docker stop chapter2` o `stop.sh` y luego lo volvemos a lanzar con `run.sh`, por ejemplo, veremos que el contador empieza en `1`. Esto es así porque estamos escribiendo en el sistema de archivos del contenedor, así que desaparece cuando el contenedor se para.
+
+Para que persista entre reinicios en `data/container.txt`debemos:
+
+- Crear un fichero llamado `container.txt`en el anfitrión y que sea `/data/container.txt` en el huésped
+- Montar un directorio en el anfitrión como `data` en el huésped
+- Hacer que Docker cree y mantenga un volumen por nosostros.
+
+
+
+![4.1](/mis-assets/img/docker/4.1.png)
+
+
+
+Cuando lo ejecutamos y apuntamos nuestro navegador a http://localhost:8086/~app/index.php, vemos que el contador funciona, incluso si paramos y reiniciamos el contenedor.
+
+
+
+![5.1](/mis-assets/img/docker/5.1.png)
+
+
+
+
+
