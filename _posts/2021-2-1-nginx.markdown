@@ -1,0 +1,135 @@
+---
+typora-copy-images-to: ../mis-assets/img/nginx/
+typora-root-url: ../
+layout: post
+title:  "Nginx en docker"
+date:   2021-02-01
+categories: jekyll update
+---
+
+## 
+
+
+
+INSTALAR NGINX CON DOCKER
+
+
+
+Ahora que ya sabemos usar docker vamos a construir un contenedor con nginx ya instalado para poder poner nuestra web en muy pocos pasos.
+
+
+
+El siguiente comando:
+
+
+
+ `docker run --rm -d -p 8080:80 --name web nginx`
+
+
+
+```
+Hará que se descargue se guarde y se ejecute la imagen, por tanto sólo tienes que visitar http://localhost:8080 y a funcionar.
+```
+
+![image-20210201160352528](/mis-assets/img/nginx/image-20210201160352528.png)
+
+
+
+![image-20210201160400023](/mis-assets/img/nginx/image-20210201160400023.png)
+
+
+
+Aqui lo que vemos es la pagina por defecto de nginx, ahora lo que vamos a hacer es crear una propia.
+
+
+
+Paramos el contenedor con el comando:
+
+
+
+```
+docker stop web
+```
+
+
+
+Y creamos un directorio llamado nginx y dentro de este, otro llamado site-content.Dentro de este creamos un archivo index.html con el contenido de nuestra pagina personalizada.
+
+
+
+![image-20210201160413711](/mis-assets/img/nginx/image-20210201160413711.png)
+
+![image-20210201160421947](/mis-assets/img/nginx/image-20210201160421947.png)
+
+
+
+De forma predeterminada, Nginx busca en el directorio `/usr/share/nginx/html` dentro del contenedor los archivos para servir. Necesitamos poner nuestros archivos html en este directorio.
+
+
+
+Para eso ejecutamos con -v para crear un volumen el  siguiente comando 
+
+
+
+```
+docker run --rm -d -p 8080:80 --name web -v ~/Documentos/nginx/site-content:/usr/share/nginx/html nginx
+```
+
+
+
+esto montará nuestro directorio local  `~/Documentos/nginx/site-content` localmente en el contenedor en ejecución en: `/usr/share/nginx/html`
+
+
+
+![image-20210201160451573](/mis-assets/img/nginx/image-20210201160451573.png)
+
+
+
+y este es el resultado:
+
+
+
+![image-20210201160503365](/mis-assets/img/nginx/image-20210201160503365.png)
+
+
+
+Ahora crearemos una imagen personalizada, Para ello necesitamos crear un archivo llamado Dockerfile con las instrucciones pertinentes para crearse:
+
+
+
+```
+FROM nginx:latest
+COPY ./site-content/index.html /usr/share/nginx/html/index.html
+```
+
+Esto lo que hace es, el comando from extrae la ultima imagen de nginx a nuestra maquina local y a continuación copiamos nuestro archivo index.html en el directorio /usr*/*share/nginx/html dentro del contenedor, sobrescribiendo el archivo predeterminado index.html.
+
+
+
+![image-20210201160519021](/mis-assets/img/nginx/image-20210201160519021.png)
+
+
+
+![image-20210201160527867](/mis-assets/img/nginx/image-20210201160527867.png)
+
+
+
+Para construir nuestra imagen, ejecuta el siguiente comando:
+
+```
+docker build -t webserver .
+```
+
+
+
+![image-20210201160541428](/mis-assets/img/nginx/image-20210201160541428.png)
+
+
+
+Ahora ya tenemos nuestra web en un contenedor personalizado y funcionando.
+
+
+
+
+
+![image-20210201160601522](/mis-assets/img/nginx/image-20210201160601522.png)
