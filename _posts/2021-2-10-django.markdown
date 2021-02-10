@@ -1,0 +1,100 @@
+---
+
+
+typora-copy-images-to: ../mis-assets/img/django/
+typora-root-url: ../
+layout: post
+title:  "Django en docker"
+date:   2021-02-10
+categories: jekyll update
+---
+
+##
+
+**DJANGO EN DOCKER**
+
+
+
+Vamos a instalar django con PostgreSQL en un contenedor docker.
+
+Para ello creamos un nuevo directorio y entramos en él.
+
+```
+mkdir docker-django/
+cd docker-django
+```
+
+Primero vamos a crear y definir un dockerfile
+
+```
+sudo nano dockerfile
+```
+
+![Captura de pantalla 2021-02-10 15:21:25](/mis-assets/img/django/Captura de pantalla 2021-02-10 152125-1612973280161.png)
+
+
+
+La imagen principal se modifica aún más mediante la instalación de los requisitos de Python definidos en el archivo requirements.txt.
+
+Creamos requirements.txt y lo definimos de la siguiente manera:
+
+```
+sudo nano requirements.txt
+```
+
+
+
+![Captura de pantalla 2021-02-10 15:21:02](/mis-assets/img/django/Captura de pantalla 2021-02-10 152102.png)
+
+
+
+Creamos un archivo llamado docker-compose.yml en el mismo directorio:
+
+```
+sudo nano docker-compose.yml
+```
+
+
+
+![Captura de pantalla 2021-02-10 15:22:02](/mis-assets/img/django/Captura de pantalla 2021-02-10 152202.png)
+
+
+
+Ahora ejecutamos el comando
+
+```
+sudo docker-compose run web django-admin startproject composeexample
+```
+
+
+
+![Captura de pantalla 2021-02-10 15:25:38](/mis-assets/img/django/Captura de pantalla 2021-02-10 152538-1612973872371.png)
+
+
+
+ y ahora solo falta conectarnos  a la base de datos, para ello necesitamos modificar el archivo composeexample/settings.py y reemplazar la zona de DATABASE de la siguiente manera.
+
+```
+sudo nano composeexample/settings.py 
+```
+
+
+
+![Captura de pantalla 2021-02-10 15:37:44](/mis-assets/img/django/Captura de pantalla 2021-02-10 153744.png)
+
+
+
+Por último ejecutamos el comando
+
+```
+sudo docker-compose up
+```
+
+
+
+Y ahora django estara corriendo por el puerto 8000 de tu conenedor docker.
+
+Ve a http://localhost:8000 y listo ya tenemos django.
+
+![Captura de pantalla 2021-02-10 15:49:55](/mis-assets/img/django/Captura de pantalla 2021-02-10 154955.png)
+

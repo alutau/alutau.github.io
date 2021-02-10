@@ -1,0 +1,14 @@
+---
+typora-copy-images-to: ../mis-assets/img/rails/
+typora-root-url: ../
+layout: post
+title:  "rails en docker"
+date:   2021-02-10
+categories: jekyll update
+---
+
+##
+
+**RAILS EN DOCKER**
+
+
