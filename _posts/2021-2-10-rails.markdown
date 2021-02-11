@@ -11,4 +11,162 @@ categories: jekyll update
 
 **RAILS EN DOCKER**
 
+Esta guía de inicio rápido le muestra cómo usar Docker Compose para configurar y ejecutar una aplicación Rails / PostgreSQL.
 
+Primero cree un directorio para el proyecto
+
+```
+mkdir docker_rails
+```
+
+Definir el proyecto 
+Empiece por configurar los archivos necesarios para crear la aplicación. La aplicación se ejecutará dentro de un contenedor Docker que contiene sus dependencias. La definición de dependencias se realiza mediante un archivo llamado Dockerfile. Para empezar, el Dockerfile consta de:
+
+```
+sudo nano dockerfile
+```
+
+![10](/mis-assets/img/rails/10.png)
+
+Eso pondrá el código de su aplicación dentro de una imagen que construye un contenedor con Ruby, Bundler y todas sus dependencias dentro.
+
+A continuación, cree un bootstrap `Gemfile`que solo cargue Rails. Lo sobrescribirá en un momento `rails new`.
+
+```
+sudo nano Gemfile
+```
+
+![11](/mis-assets/img/rails/11.png)
+
+
+
+Crea un vacío `Gemfile.lock`para construir nuestro `Dockerfile`.
+
+```
+touch Gemfile.lock
+```
+
+A continuación, proporcione un script de punto de entrada para solucionar un problema específico de Rails que impide que el servidor se reinicie cuando un determinado `server.pid`archivo ya existe. Este script se ejecutará cada vez que se inicie el contenedor. `entrypoint.sh`consiste en:
+
+
+
+```
+sudo nano entrypoint.sh
+```
+
+![13](/mis-assets/img/rails/13.png)
+
+Finalmente, `docker-compose.yml`es donde ocurre la magia. Este archivo describe los servicios que componen su aplicación (una base de datos y una aplicación web), cómo obtener la imagen de Docker de cada uno (la base de datos solo se ejecuta en una imagen PostgreSQL prefabricada y la aplicación web se crea a partir del directorio actual), y la configuración necesaria para vincularlos y exponer el puerto de la aplicación web.
+
+```
+sudo nano docker-compose.yml
+```
+
+![14](/mis-assets/img/rails/14.png)
+
+
+
+### Construye el proyecto 
+
+Con esos archivos en su lugar, ahora puede generar la aplicación de esqueleto Rails usando [docker-compose run](https://docs.docker.com/compose/reference/run/) :
+
+```
+sudo docker-compose run --no-deps web rails new . --force --database=postgresql
+```
+
+
+
+En primer lugar, Compose crea la imagen para el `web`servicio utilizando `Dockerfile`. Le `--no-deps`dice a Compose que no inicie los servicios vinculados. Luego se ejecuta `rails new`dentro de un nuevo contenedor, usando esa imagen. Una vez hecho esto, debería haber generado una nueva aplicación.
+
+Enumere los archivos.
+
+![15](/mis-assets/img/rails/15.png)
+
+
+
+### Conecta la base de datos 
+
+La aplicación ahora es de arranque, pero aún no lo ha hecho. De forma predeterminada, Rails espera que se ejecute una base de datos, por `localhost`lo que debe apuntar al `db`contenedor. También debe cambiar la base de datos y el nombre de usuario para alinearlos con los valores predeterminados establecidos por la `postgres`imagen.
+
+Reemplace el contenido de `config/database.yml`por lo siguiente:
+
+
+
+```
+sudo nano config/database.yml
+```
+
+![16](/mis-assets/img/rails/16.png)
+
+
+
+Ahora puede iniciar la aplicación con [docker-compose up](https://docs.docker.com/compose/reference/up/) :
+
+
+
+```
+sudo docker-compose up
+```
+
+
+
+Finalmente, necesitas crear la base de datos. En otra terminal, ejecuta:
+
+
+
+```
+sudo docker-compose run web rake db:create
+```
+
+
+
+### ¡Vea la página de bienvenida de Rails! 
+
+Eso es todo. Su aplicación ahora debería estar ejecutándose en el puerto 3000 en su demonio Docker.
+
+En Docker Desktop para Mac y Docker Desktop para Windows, vaya a `http://localhost:3000`en un navegador web para ver la Bienvenida de Rails.
+
+
+
+![19](/mis-assets/img/rails/19.png)
+
+
+
+### Detenga la aplicación 
+
+Para detener la aplicación, ejecute [docker-compose](https://docs.docker.com/compose/reference/down/) en el directorio de su proyecto. Puede usar la misma ventana de terminal en la que inició la base de datos u otra en la que tenga acceso a un símbolo del sistema. Esta es una forma limpia de detener la aplicación.
+
+```none
+vmb at snapair in ~/sandbox/rails
+$ docker-compose down
+Stopping rails_web_1 ... done
+Stopping rails_db_1 ... done
+Removing rails_web_run_1 ... done
+Removing rails_web_1 ... done
+Removing rails_db_1 ... done
+Removing network rails_default
+```
+
+### Reinicia la aplicación 
+
+Para reiniciar la aplicación, ejecute `docker-compose up`en el directorio del proyecto.
+
+### Reconstruir la aplicación 
+
+Si realiza cambios en Gemfile o en el archivo Compose para probar algunas configuraciones diferentes, debe reconstruir. Algunos cambios solo requieren `docker-compose up --build`, pero una reconstrucción completa requiere volver a ejecutar `docker-compose run web bundle install`para sincronizar los cambios en `Gemfile.lock`el host, seguido de `docker-compose up --build`.
+
+A continuación se muestra un ejemplo del primer caso, en el que no es necesaria una reconstrucción completa. Suponga que simplemente desea cambiar el puerto expuesto en el host local de `3000` en nuestro primer ejemplo a `3001`. Realice el cambio en el archivo Compose para exponer el puerto `3000`en el contenedor a través de un nuevo puerto `3001`, en el host, y guarde los cambios:
+
+```
+sudo nano docker-compose.yml
+```
+
+![22](/mis-assets/img/rails/22.png)
+
+
+
+Ahora, reconstruya y reinicie la aplicación con `docker-compose up --build`.
+
+Dentro del contenedor, su aplicación se ejecuta en el mismo puerto que antes `3000`, pero Rails Welcome ahora está disponible `http://localhost:3001`en su host local.
+
+![23](/mis-assets/img/rails/23.png)
