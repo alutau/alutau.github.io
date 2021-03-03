@@ -2,7 +2,7 @@
 typora-copy-images-to: ../mis-assets/img/autorizado/
 typora-root-url: ../
 layout: post
-title:  "Ataque XSS"
+title:  "Autorizado"
 date:   2021-03-01
 categories: jekyll update
 ---
