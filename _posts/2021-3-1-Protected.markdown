@@ -1,11 +1,13 @@
+---
 typora-copy-images-to: ../mis-assets/img/protected/
 typora-root-url: ../
 layout: post
 title:  "Protected"
 date:   2021-03-03
 categories: jekyll update
+---
 
-
+##
 
 # Proteger con contraseña un directorio mediante autenticación básica
 
@@ -15,13 +17,13 @@ En esta guía práctica, le mostraremos cómo configurar un directorio protegido
 
 Lo primero que debemos hacer en este ejemplo es crear un directorio para proteger en la raíz de nuestro documento. Digamos que la raíz de nuestro documento es **/ var / www / html** . Crearemos un directorio llamado **protected** en la raíz del documento - **/ var / www / html / protected** .
 
-![2021-03-03_15-25](/home/usuari2/alutau.github.io/alutau.github.io/mis-assets/img/protected/2021-03-03_15-25.png)
+![2021-03-01_15-25](/mis-assets/img/protected/2021-03-01_15-25.png)
 
 Lo siguiente que debe hacer es crear un archivo de contraseña con los usuarios. Usaremos la utilidad htpasswd proporcionada en el paquete principal de Apache. El archivo de contraseña se puede almacenar en cualquier lugar de su disco duro. En nuestro ejemplo, crearemos nuestro archivo htpasswd en / etc / htpasswd .
 
 Tenga en cuenta que la ubicación del archivo htpasswd puede estar en cualquier lugar que desee en su unidad local. Solo necesita especificar la ruta completa al archivo htpasswd con la directiva AuthUserFile . Elija lo que considere que es una ubicación sensata para sus archivos de contraseñas.
 
-![2021-03-03_15-38](/home/usuari2/alutau.github.io/alutau.github.io/mis-assets/img/protected/2021-03-03_15-38.png)
+![2021-03-01_15-36](/mis-assets/img/protected/2021-03-01_15-36.png)
 
 
 
@@ -39,7 +41,7 @@ Tenga en cuenta que la ubicación del archivo htpasswd puede estar en cualquier 
 </Directory>
 ```
 
-![2021-03-03_15-43](/home/usuari2/alutau.github.io/alutau.github.io/mis-assets/img/protected/2021-03-03_15-43.png)
+![2021-03-01_15-38](/mis-assets/img/protected/2021-03-01_15-38.png)
 
 
 
@@ -67,7 +69,7 @@ Ahora necesitamos crear un bloque **<Directory>** en httpd.conf o en el archivo 
 </Directory>
 ```
 
-![2021-03-03_15-43](/home/usuari2/alutau.github.io/alutau.github.io/mis-assets/img/protected/2021-03-03_15-43.png)
+![2021-03-01_15-43](/mis-assets/img/protected/2021-03-01_15-43.png)
 
 
 
@@ -75,11 +77,9 @@ Ahora necesitamos crear un bloque **<Directory>** en httpd.conf o en el archivo 
 
 Ahora puede ir a [http: // localhost / protected](https://translate.google.com/website?sl=auto&tl=es&u=http://localhost/protected) y el navegador le solicitará que ingrese sus credenciales. Si ingresa las credenciales correctas, se le otorgará acceso a **protected** . Si no ingresa las credenciales correctas, se le pedirá continuamente que  ingrese las credenciales hasta que ingrese las credenciales correctas o  haga clic en el botón **Cancelar** .
 
-![2021-03-03_15-57_1](/home/usuari2/alutau.github.io/alutau.github.io/mis-assets/img/protected/2021-03-03_15-57_1.png)
+![2021-03-01_15-57](/mis-assets/img/protected/2021-03-01_15-57.png)
 
-![2021-03-03_15-58](/home/usuari2/alutau.github.io/alutau.github.io/mis-assets/img/protected/2021-03-03_15-58.png)
-
-
+![2021-03-01_15-57_1](/mis-assets/img/protected/2021-03-01_15-57_1.png)
 
 Para Apache httpd 2.4, se ha renovado el mecanismo de autorización. A continuación, se muestra una muestra de una configuración que utiliza la autenticación HTTP básica para todo [DocumentRoot](https://translate.google.com/website?sl=auto&tl=es&u=http://httpd.apache.org/docs/current/mod/core.html%23documentroot) y permite el acceso público y no restringido a un directorio específico:
 
