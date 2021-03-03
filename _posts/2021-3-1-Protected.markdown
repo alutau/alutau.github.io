@@ -21,7 +21,7 @@ Lo siguiente que debe hacer es crear un archivo de contraseña con los usuarios.
 
 Tenga en cuenta que la ubicación del archivo htpasswd puede estar en cualquier lugar que desee en su unidad local. Solo necesita especificar la ruta completa al archivo htpasswd con la directiva AuthUserFile . Elija lo que considere que es una ubicación sensata para sus archivos de contraseñas.
 
-![2021-03-01_15-36](/home/usuari2/alutau.github.io/alutau.github.io/mis-assets/img/protected/2021-03-01_15-36.png)
+![2021-03-03_15-38](/home/usuari2/alutau.github.io/alutau.github.io/mis-assets/img/protected/2021-03-03_15-38.png)
 
 
 
@@ -39,7 +39,7 @@ Tenga en cuenta que la ubicación del archivo htpasswd puede estar en cualquier 
 </Directory>
 ```
 
-![2021-03-01_15-38](/home/usuari2/alutau.github.io/alutau.github.io/mis-assets/img/protected/2021-03-01_15-38.png)
+![2021-03-03_15-43](/home/usuari2/alutau.github.io/alutau.github.io/mis-assets/img/protected/2021-03-03_15-43.png)
 
 
 
