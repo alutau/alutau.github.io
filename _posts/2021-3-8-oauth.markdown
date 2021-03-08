@@ -1,0 +1,56 @@
+---
+typora-copy-images-to: ../mis-assets/img/oauth/
+typora-root-url: ../
+layout: post
+title:  "TOKEN OAuth"
+date:   2021-03-08
+categories: jekyll update
+---
+
+##
+
+Vamos a crear una aplicación web que use la autorización OAuth de Google.
+
+Antes de que pueda comenzar el proceso de OAuth, primero debes registrar una nueva aplicación con el servicio. Desde aquí puedes generar las credenciales para tu aplicación.
+
+Al registrar una nueva aplicación, normalmente registra información básica como el nombre de la aplicación, el sitio web, un logotipo, etc. Además, debes registrar una URI de redireccionamiento que se utilizará para redirigir a los usuarios al servidor web, el navegador o las aplicaciones móviles.
+
+Tenemos que crear credenciales para esta aplicacion:
+
+![2021-03-08_15-55](/mis-assets/img/oauth/2021-03-08_15-55.png)
+
+Escribid http://localhost:8080/oauth2callback.php en el apartado URI. Esta es la página a la que rediccionará Google cuando haya finalizado  el proceso de login.
+
+![image-20210221183222810](https://victorponz.github.io/Ciberseguridad-PePS/assets/img/autenticacion/image-20210221183222810.png)
+
+
+
+**Instala Composer** desde la página de [instalación](https://getcomposer.org/download/).
+
+![2021-03-03_16-44](/mis-assets/img/oauth/2021-03-03_16-44.png)
+
+![2021-03-03_16-58](/mis-assets/img/oauth/2021-03-03_16-58.png)
+
+![2021-03-03_16-58_1](/mis-assets/img/oauth/2021-03-03_16-58_1.png)
+
+Ahora ya puedes descargarte este proyecto de [GitHub](https://github.com/victorponz/oauth.git). Si todo ha ido bien, ejecuta `composer install`. De esta manera ya tienes instalado el paquete [Google API Client](https://github.com/googleapis/google-api-php-client). Además debes renombrar el archivo `client_secrets-sample.json` por `client_secrets.json` e introducir tus credenciales.
+
+
+
+![2021-03-03_17-07](/mis-assets/img/oauth/2021-03-03_17-07.png)
+
+En el directorio donde has descargado el repositorio ejecuta
+
+```
+php -S localhost:8080
+```
+
+![2021-03-03_17-09](/mis-assets/img/oauth/2021-03-03_17-09.png)
+
+Visita localhost:8080
+
+![2021-03-08_15-42](/mis-assets/img/oauth/2021-03-08_15-42.png)
+
+![2021-03-08_15-42_1](/mis-assets/img/oauth/2021-03-08_15-43.png)
+
+Ya podemos entrar a nuestra aplicación.
