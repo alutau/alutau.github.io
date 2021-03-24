@@ -37,4 +37,6 @@ Además, modificaremos el archivo apache2.conf para obligar al navegador de nues
 
 
 
-![2021-03-24_15-31](/mis-assets/img/hardening/2021-03-24_15-31.png)
+![2021-03-24_17-05](/mis-assets/img/hardening/2021-03-24_17-05.png)
+
+Restablecemos el servidor de apache y a funcionar.
