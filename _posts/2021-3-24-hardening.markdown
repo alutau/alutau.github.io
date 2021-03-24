@@ -30,3 +30,11 @@ Y modificamos el dockerfile para que lo copie.
 Ahora ya no muestra que tipo de versión es tan solo dice que es apache.
 
 ![Captura de pantalla 2021-03-24 131530](/mis-assets/img/hardening/Captura de pantalla 2021-03-24 131530.png)
+
+
+
+Además, modificaremos el archivo apache2.conf para obligar al navegador de nuestros clientes a usar https (web segura) y tambien añadiremos otra cabecera para evitar que nuestro servidor cargue contenido de otros sitios.Esto se configura según las necesidades de cada servidor ya que quizas necesites cargar por ejemplo video de otra fuente, en ese caso se puede modificar la cabecera para ello.
+
+
+
+![2021-03-24_15-31](/mis-assets/img/hardening/2021-03-24_15-31.png)
