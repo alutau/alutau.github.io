@@ -3,7 +3,7 @@ typora-copy-images-to: ../mis-assets/img/hardening/
 typora-root-url: ../
 layout: post
 title:  "Hardening: Seguridad en el servidor apache"
-date:   2021-03-08
+date:   2021-03-24
 categories: jekyll update
 ---
 
