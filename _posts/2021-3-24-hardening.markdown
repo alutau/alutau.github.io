@@ -7,7 +7,7 @@ date:   2021-03-24
 categories: jekyll update
 ---
 
-##
+## PRÁCTICA 1
 
 Vamos a securizar un servidor  apache que correrá en un docker por esto modificaremos el archivo dockerfile para hacerlo más seguro.
 
@@ -46,3 +46,45 @@ El dockerfile para estas modificaciones quedaría así:
 
 
 ![Captura de pantalla (533)](/mis-assets/img/hardening/Captura de pantalla (533).png)
+
+## PRÁCTICA 2
+
+Vamos a instalar y configurar un firewall de aplicación llamado ModSecurity.
+
+Instalar
+
+```
+sudo apt-get install modsecurity-crs 
+```
+
+Para configurar basta con copiar las reglas que trae definidas por defecto al directorio de configuración
+
+```
+sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+
+```
+
+Restablecemos apache y ya estará funcionando.
+
+```
+sudo systemctl restart apache2
+```
+
+Para comprobar vamos a intentar simular un ataque XSS poniendo un script en la pagina post.php
+
+![image-20210407181934455](/mis-assets/img/hardening/image-20210407181934455.png)
+
+
+
+Nos salta un 403.
+
+![image-20210407182026796](/mis-assets/img/hardening/image-20210407182026796.png)
+
+El dockerfile quedaría así:
+
+![image-20210407182147681](/mis-assets/img/hardening/image-20210407182147681.png)
+
+
+
+
+
