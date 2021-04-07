@@ -33,10 +33,16 @@ Ahora ya no muestra que tipo de versión es tan solo dice que es apache.
 
 
 
-Además, modificaremos el archivo apache2.conf para obligar al navegador de nuestros clientes a usar https (web segura) y tambien añadiremos otra cabecera para evitar que nuestro servidor cargue contenido de otros sitios.Esto se configura según las necesidades de cada servidor ya que quizas necesites cargar por ejemplo video de otra fuente, en ese caso se puede modificar la cabecera para ello.
+Además, modificaremos el archivo  000-default.conf para obligar al navegador de nuestros clientes a usar https (web segura) y también añadiremos otra cabecera para evitar que nuestro servidor cargue contenido de otros sitios. Esto se configura según las necesidades de cada servidor ya que quizás necesites cargar por ejemplo video de otra fuente, en ese caso se puede modificar la cabecera para ello.
+
+![Captura de pantalla (531)](/mis-assets/img/hardening/Captura de pantalla (531).png)
 
 
 
-![2021-03-24_17-05](/mis-assets/img/hardening/2021-03-24_17-05.png)
+Para obligar a usar el protocolo https además necesitaremos instalar el certificado digital de sitio seguro, tal  como hicimos en https://alutau.github.io/jekyll/update/2021/01/27/Apachessl.html.
 
-Restablecemos el servidor de apache y a funcionar.
+El dockerfile para estas modificaciones quedaría así:
+
+
+
+![Captura de pantalla (533)](/mis-assets/img/hardening/Captura de pantalla (533).png)
