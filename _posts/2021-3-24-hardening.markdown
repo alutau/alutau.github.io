@@ -86,5 +86,59 @@ El dockerfile quedaría así:
 
 
 
+## PRÁCTICA 3
+
+Vamos a instalar unas reglas OWASP para mitigar varios ataques típicos a las paginas web para ello necesitamos instalar en apache la librería *libapache2-mod-security2* .
+
+Para instalar y configurar esta librería vamos a seguir estos comandos:
+
+```
+git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git
+cd owasp-modsecurity-crs.git
+sudo mv crs-setup.conf.example /etc/modsecurity/crs-setup.conf
+sudo mv rules/ /etc/modsecurity
+```
+
+Una vez realizado esto deberíamos ver el archivo */etc/apache2/mods-enabled/security2.conf así:
+
+OJO si no quitas la ultima línea (IncludeOptional) da un error al reiniciar apache
+
+![Captura de pantalla (561)](/mis-assets/img/hardening/Captura de pantalla (561).png)
+
+Ahora vamos a comprobar que funciona, modificamos el archivo */etc/apache2/sites-availables/000-default.conf* y añadimos
+
+```
+SecRuleEngine On
+SecRule ARGS:testparam "@contains test" "id:1234,deny,status:403,msg:'Cazado por Ciberseguridad'"
+```
+
+Reiniciamos apache y comprobamos introduciendo en el navegador:
+
+```
+localhost/index.html?testparam=test
+localhost/index.html?exec=/bin/bash
+localhost/index.html?exec=/../../ 
+
+```
+
+Estos son ataques básicos a la web excepto el primero los otros dos son cazados y bloqueados por modsecurity.
+
+![Captura de pantalla (557)](/mis-assets/img/hardening/Captura de pantalla (557).png)
 
 
+
+![Captura de pantalla (558)](/mis-assets/img/hardening/Captura de pantalla (558).png)
+
+
+
+![Captura de pantalla (559)](/mis-assets/img/hardening/Captura de pantalla (559).png)
+
+Esto prueba que modsecurity esta funcionando y para asegurarnos mas podemos ejecutar el comando
+
+```
+sudo tail /var/log/apache2/error.log
+```
+
+Y veremos como los ataques han sido detectados y bloqueados por modsecurity.
+
+![Captura de pantalla (560)](/mis-assets/img/hardening/Captura de pantalla (560).png)
