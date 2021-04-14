@@ -1,5 +1,5 @@
 ---
-typora-copy-images-to: ../mis-assets/img/evitardos/
+typora-copy-images-to: ../../alutau.github.io/mis-assets/img/evitardos
 typora-root-url: ../
 layout: post
 title:  "Evitar ataques dos en apache"
@@ -25,7 +25,7 @@ sudo apt install libapache2-mod-evasive
 
 Después debemos editar el archivo de configuración */etc/apache2/mods-enabled/evasive.conf* con el siguiente contenido:
 
-![2021-04-12_14-12](/../../Escritorio/capturas/puesta en marcha/2021-04-12_14-12.png)
+![2021-04-12_14-12](/mis-assets/img/evitardos/2021-04-12_14-12.png)
 
 
 
@@ -49,16 +49,16 @@ sudo systemctl restart apache2
 
 Ahora vamos a probar el funcionamiento de mod_evasive con Apachebench:
 
-![2021-04-12_14-15](/../../Escritorio/capturas/puesta en marcha/2021-04-12_14-15.png)
+![2021-04-12_14-15](/mis-assets/img/evitardos/2021-04-12_14-15.png)
 
 Podemos ver que de 100 solicitudes 70 fueron rechazadas.
 
 Si revisamos el arcivo de logs 
 
-![2021-04-12_15-00](/../../Escritorio/capturas/puesta en marcha/2021-04-12_15-00.png)
+![2021-04-12_15-00](/mis-assets/img/evitardos/2021-04-12_15-00.png)
 
-Si queremos montar este servicio en docker, la carpeta y el dockerfile quedarían así:![2021-04-12_14-34](/../../Escritorio/capturas/puesta en marcha/2021-04-12_14-34.png)
+Si queremos montar este servicio en docker, la carpeta y el dockerfile quedarían así:
 
+![2021-04-12_14-34](/mis-assets/img/evitardos/2021-04-12_14-34.png)
 
-
-![2021-04-12_14-36](/../../Escritorio/capturas/puesta en marcha/2021-04-12_14-36.png)
+![2021-04-12_14-36](/mis-assets/img/evitardos/2021-04-12_14-36.png)
